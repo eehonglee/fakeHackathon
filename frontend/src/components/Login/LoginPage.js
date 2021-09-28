@@ -67,9 +67,23 @@ function LoginPage(props) {
     if (formIsValid) {
       const enteredEmail = emailState.value;
       const enteredPassword = passwordState.value;
-      console.log(enteredEmail);
-      console.log(enteredPassword);
-      //history.push("/home");
+
+      const url = "http://localhost:3001/api/login";
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3001",
+          "Content-Type": "application/json",
+        },
+      }).then(async (res) => {
+        const data = await res.json();
+        console.log(data);
+      });
     }
   };
 
